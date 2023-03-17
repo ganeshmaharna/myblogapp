@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan("dev"));
 app.use('/',Router);
-
+mongoose.set('strictQuery', false);
 const PORT=process.env.PORT;
 app.listen(PORT,()=>{
     console.log(`Server is started at port ${PORT}`);

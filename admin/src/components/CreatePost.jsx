@@ -1,11 +1,10 @@
 import React from 'react'
+import PostForm from './PostForm';
 
 const CreatePost = () => {
   return (
-    <>
-      Hello this is CreatePost
-    </>
-  )
+    <PostForm/>
+  );
 }
 
-export default CreatePost
+export default CreatePost;

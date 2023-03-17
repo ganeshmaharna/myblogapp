@@ -41,6 +41,6 @@ router.get("/related-posts/:postId", getRelatedPosts);
 router.post(
     "/upload-image",
     upload.single("image"),
-    uploadImage
+    uploadImage,
 )
 export default router;

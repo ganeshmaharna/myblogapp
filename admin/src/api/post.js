@@ -38,3 +38,19 @@ export const searchPost = async (query)=>{
         return {error: error.message || error};
     }
 };
+
+export const uploadImage = async (formData)=>{
+    try{
+        console.log(formData);
+        const {data} = await client.post(`/upload-image`,formData);
+        console.log(data);
+        return data;
+    }catch(error){
+        const {response} = error;
+        console.log(response);
+        if(response?.data){
+            return response.data;
+        }
+        return {error: error.message || error};
+    }
+};
