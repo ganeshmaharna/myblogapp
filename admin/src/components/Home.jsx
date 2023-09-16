@@ -4,6 +4,7 @@ import { useSearch } from "../context/SearchProvider";
 import { getPosts } from "../api/post";
 import { deletePost } from "../api/post";
 import PostCard from "./PostCard";
+import { useNotification } from "../context/NotificationProvider";
 
 let pageNo = 0;
 const POST_LIMIT = 9;
@@ -18,19 +19,22 @@ const Home = () => {
   const { searchResult } = useSearch();
   const [posts, setPosts] = useState([]);
   const [totalPostCount, setTotalPostCount] = useState([]);
+  const {updateNotification} = useNotification();
 
   const paginationCount = getPaginationCount(totalPostCount);
   const paginationArray = new Array(paginationCount).fill(" ");
 
   const fetchPosts = async () => {
     const { error, posts, postCount } = await getPosts(pageNo, POST_LIMIT);
-    if (error) return console.log(error);
+    if (error) return updateNotification('error',error);
+
     console.log(posts);
     setPosts(posts);
     setTotalPostCount(postCount);
   };
   useEffect(() => {
     fetchPosts();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const fetchMorePosts = (index) => {
     pageNo = index;
@@ -41,7 +45,10 @@ const Home = () => {
     if (!confirmed) return;
 
     const { error, message } = await deletePost(id);
-    if (error) return console.log(error);
+    if (error) return updateNotification('error',error);
+
+    updateNotification('success',message)
+
     console.log(message);
     const newPosts = posts.filter((p) => p.id !== id);
     setPosts(newPosts);

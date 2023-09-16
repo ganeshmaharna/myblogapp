@@ -8,7 +8,15 @@ module.exports = {
         'bottom': 'bottom',
         'height': 'height',
       },
+      width:{
+        "device-width": "360px"
+      },
+      height:{
+        "device-height":"640px"
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography')
+  ],
 }

@@ -222,6 +222,7 @@ export const getRelatedPosts = async (req, res) => {
     return res.status(401).json({ error: "Invalid request" });
 
   const post = await Post.findById(postId);
+  console.log("This is related post",post);
   if(!post)
     return res.status(404).json({ error: "Post not found" });
 
